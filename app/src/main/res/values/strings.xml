@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Depth Estimation</string>
+    <string name="str_flip_camera">Flip Camera</string>
+    <string name="str_loading">Loading...</string>
+    <string name="str_whois">\@haruncetin</string>
+    <string-array name="depthView_array">
+        <item>Grayscale</item>
+        <item>Heatmap</item>
+    </string-array>
+
+</resources>
