@@ -167,6 +167,7 @@ class DepthEstimationActivity : AppCompatActivity() {
         }
 
         val originalResolution = Size(viewOriginal!!.width, viewOriginal!!.height)
+
         originalView = Preview.Builder()
             .setTargetResolution(originalResolution)
             .build()
