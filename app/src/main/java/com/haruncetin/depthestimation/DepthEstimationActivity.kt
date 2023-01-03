@@ -1,7 +1,6 @@
 package com.haruncetin.depthestimation
 
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -90,7 +89,7 @@ class DepthEstimationActivity : AppCompatActivity() {
                     exitProcess(0)
                 }
                 doubleBackToExit = true
-                Toast.makeText(MainActivity.applicationContext(), "Press again to exit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Press again to exit", Toast.LENGTH_SHORT).show()
                 Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExit = false }, 2000)
             }
         })
@@ -176,7 +175,7 @@ class DepthEstimationActivity : AppCompatActivity() {
         val cameraFacingSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
         depthAnalysisView = ImageAnalysis.Builder()
-            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888)
+//            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888)
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 

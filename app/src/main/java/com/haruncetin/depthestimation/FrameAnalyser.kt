@@ -14,8 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.logging.Logger
-
 
 // Image Analyser for performing depth estimation on the selected camera frames.
 @ExperimentalGetImage
@@ -24,14 +22,15 @@ class FrameAnalyser(
     private var depthView: SurfaceView
 ) : ImageAnalysis.Analyzer {
 
-    var metrics: DisplayMetrics? = null
+    private var metrics: DisplayMetrics? = null
 
     private var inferenceTime: Long = 0
     private var mLastTime: Long = 0
     private var fps = 0
     private var ifps:Int = 0
+
     init{
-        metrics = MainActivity.applicationContext().resources.displayMetrics
+        metrics =  DepthEstimationApp.applicationContext().resources.displayMetrics
     }
 
     private var readyToProcess = true

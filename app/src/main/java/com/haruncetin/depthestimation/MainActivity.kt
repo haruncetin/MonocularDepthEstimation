@@ -1,6 +1,5 @@
 package com.haruncetin.depthestimation
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
@@ -17,7 +16,7 @@ import kotlin.system.exitProcess
 class MainActivity : AppCompatActivity() {
     var haruncetin: TextView? = null
     companion object {
-        val APP_LOG_TAG = "MiDaS Depth Estimation"
+        const val APP_LOG_TAG = "MiDaS Depth Estimation"
         private var instance: MainActivity? = null
 
         fun applicationContext() : Context {
@@ -32,12 +31,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+//        applicationContext.openFileInput("/vendor/etc/public.libraries.txt").use {
+//            val br = it.bufferedReader()
+//            var line : String? = null
+//            do {
+//                line = br.readLine()
+//                Log.i(MainActivity.APP_LOG_TAG, line)
+//            } while (line != null)
+//        }
         haruncetin = findViewById(R.id.haruncetin)
         haruncetin!!.paintFlags = haruncetin!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         haruncetin!!.setOnClickListener {
             ContextCompat.startActivity(
-                applicationContext(),
+                DepthEstimationApp.applicationContext(),
                 Intent(Intent.ACTION_VIEW,Uri.parse("https://www.haruncetin.com.tr")),
                 null
             )

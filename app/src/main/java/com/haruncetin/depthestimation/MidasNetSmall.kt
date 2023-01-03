@@ -1,5 +1,6 @@
 package com.haruncetin.depthestimation
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.camera.core.ExperimentalGetImage
@@ -25,7 +26,9 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBufferFloat
  Then perform operations on the tensor as described by `inputTensorProcessor`.
  */
 @ExperimentalGetImage
-class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
+class MidasNetSmall(
+    internal var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE
+) {
     companion object {
         private const val MODEL_NAME        = "lite-model_midas_v2_1_small_1_lite_1.tflite"
         private const val INPUT_IMAGE_DIM   = 256
@@ -64,7 +67,7 @@ class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
             }
             this.numThreads = NUM_THREADS
         }
-        interpreter = Interpreter(FileUtil.loadMappedFile(MainActivity.applicationContext(), MODEL_NAME) , interpreterOptions)
+        interpreter = Interpreter(FileUtil.loadMappedFile(DepthEstimationApp.applicationContext(), MODEL_NAME) , interpreterOptions)
     }
 
     fun getDepthMap( inputImage : Bitmap) : Bitmap {
@@ -128,7 +131,5 @@ class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
             output.loadArray(values)
             return output
         }
-
     }
-
 }
