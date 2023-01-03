@@ -17,7 +17,13 @@ import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import org.tensorflow.lite.support.tensorbuffer.TensorBufferFloat
 
-
+/*
+ The model takes in an RGB image of shape (256, 256, 3) and
+ outputs a depth map of shape (256, 256, 1)
+ Create a tensor of shape (1, INPUT_IMAGE_DIM, INPUT_IMAGE_DIM, 3)
+ from the given Bitmap.
+ Then perform operations on the tensor as described by `inputTensorProcessor`.
+ */
 @ExperimentalGetImage
 class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
     companion object {
@@ -32,7 +38,10 @@ class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
 
     private var interpreter : Interpreter
 
-    // Prepare the image for the MiDAS model
+    // Prepare the image for the model.
+    // The image size is adjusted to 256x256 and
+    // it's values are normalized to the range of 0.0-1.0
+    // because of the model accept 256x256 sized normalized values.
     private val inputTensorProcessor = ImageProcessor.Builder()
         .add(ResizeOp(INPUT_IMAGE_DIM, INPUT_IMAGE_DIM, ResizeOp.ResizeMethod.BILINEAR))
         .add(NormalizeOp(NORM_MEAN, NORM_STD))
@@ -59,11 +68,6 @@ class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
     }
 
     fun getDepthMap( inputImage : Bitmap) : Bitmap {
-        // The model takes in an RGB image of shape (256, 256, 3) and
-        // outputs a depth map of shape (256, 256, 1)
-        // Create a tensor of shape (1, INPUT_IMAGE_DIM, INPUT_IMAGE_DIM, 3)
-        // from the given Bitmap.
-        // Then perform operations on the tensor as described by `inputTensorProcessor`.
         var inputTensor = TensorImage.fromBitmap( inputImage )
 
         val startTime = System.currentTimeMillis()
@@ -76,7 +80,7 @@ class MidasNetSmall(var mapType: MapType = MapType.DEPTHVIEW_GRAYSCALE) {
             DataType.FLOAT32
         )
 
-        // Perform inference computation on the MiDAS model
+        // Perform inference on the MiDAS model
         interpreter.run( inputTensor.buffer, outputTensor.buffer )
 
         // Perform operations on the output tensor as described by `outputTensorProcessor`.
