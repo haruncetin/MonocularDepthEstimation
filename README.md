@@ -10,8 +10,8 @@ The model performance mostly depends on device specifications that run the appli
 | **Device**              | **OS**           | **Inference Time (ms)** | **Frame Per Second** |
 |-------------------------|------------------|-------------------------|----------------------|
 | Xiaomi Redmi Note 8 Pro | Android 11       | 70-80                   | 6                    |
-|     Lenovo K6 Note      |     Android 7    |     500-700             |     1                |
-
+|     Lenovo K6 Note      | Android 7        |     500-700             |     1                |
+|       Galaxy A20S       | Android 12	     | Failed	                 | Failed               |
 ## Screenshots
 
 ### Lenovo K6 Note
