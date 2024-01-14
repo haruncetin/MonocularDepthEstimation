@@ -21,4 +21,6 @@ The model performance mostly depends on device specifications that run the appli
 <img src="media/depth_est_2_gs.jpg" width="400"> <img src="media/depth_est_2_hm.jpg" width="400">
 
 ### Xiaomi Redmi Note 8 Pro
-Will be added soon...
+<img src="media/note8pro_depth_est_prait_gs.jpg" width="400"> <img src="media/note8pro_depth_est_prait_hm.jpg" width="400">
+<img src="media/note8pro_depth_est_lscape_gs.jpg" width="400"> 
+<img src="media/note8pro_depth_est_lscape_hm.jpg" width="400">
