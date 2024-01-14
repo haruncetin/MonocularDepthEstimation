@@ -24,3 +24,9 @@ The model performance mostly depends on device specifications that run the appli
 <img src="media/note8pro_depth_est_prait_gs.jpg" width="400"> <img src="media/note8pro_depth_est_prait_hm.jpg" width="400">
 <img src="media/note8pro_depth_est_lscape_gs.jpg" width="400"> 
 <img src="media/note8pro_depth_est_lscape_hm.jpg" width="400">
+
+### Xiaomi Redmi Note 10 Pro
+<img src="media/note10pro_depth_est_prait_gs_1.jpg" width="400"> <img src="media/note10pro_depth_est_prait_hm.jpg" width="400">
+<img src="media/note10pro_depth_est_prait_gs_2.jpg" width="400"> <img src="media/note10pro_depth_est_prait_gs_3.jpg" width="400">
+<img src="media/note10pro_depth_est_lscape_gs.jpg" width="400"> 
+<img src="media/note10pro_depth_est_lscape_hm.jpg" width="400">
