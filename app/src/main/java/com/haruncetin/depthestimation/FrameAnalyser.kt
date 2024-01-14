@@ -1,5 +1,6 @@
 package com.haruncetin.depthestimation
 
+import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -46,7 +47,7 @@ class FrameAnalyser(
         readyToProcess = false
 
         if (image.image != null) {
-            Log.i(MainActivity.APP_LOG_TAG, "Image.format: %d, Image.width: %d, Image.height: %d".format(image.image!!.format, image.image!!.width, image.image!!.height))
+//            Log.i(MainActivity.APP_LOG_TAG, "Image.format: %d, Image.width: %d, Image.height: %d".format(image.image!!.format, image.image!!.width, image.image!!.height))
             val bitmap = image.image!!.toBitmap(image.imageInfo.rotationDegrees)
             image.close()
             CoroutineScope( Dispatchers.Main ).launch {

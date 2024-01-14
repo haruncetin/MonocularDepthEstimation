@@ -1,6 +1,8 @@
 package com.haruncetin.depthestimation
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
@@ -9,8 +11,10 @@ import android.os.Looper
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ExperimentalGetImage
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlin.system.exitProcess
+
 
 @ExperimentalGetImage
 class MainActivity : AppCompatActivity() {
@@ -19,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         const val APP_LOG_TAG = "MiDaS Depth Estimation"
         private var instance: MainActivity? = null
 
-        fun applicationContext() : Context {
-            return instance!!.applicationContext
-        }
+//        fun applicationContext() : Context {
+//            return instance!!.applicationContext
+//        }
     }
 
     init {
@@ -43,7 +47,8 @@ class MainActivity : AppCompatActivity() {
         haruncetin!!.paintFlags = haruncetin!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         haruncetin!!.setOnClickListener {
             ContextCompat.startActivity(
-                DepthEstimationApp.applicationContext(),
+//                DepthEstimationApp.applicationContext(),
+                DepthEstimationApp().applicationContext,
                 Intent(Intent.ACTION_VIEW,Uri.parse("https://www.haruncetin.com.tr")),
                 null
             )

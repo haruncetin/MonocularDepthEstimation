@@ -13,15 +13,15 @@ class DepthEstimationApp : Application() {
     }
 
     companion object {
-        private var instance: DepthEstimationApp? = null
+        private lateinit var instance: DepthEstimationApp
 
         fun applicationContext() : Context {
-            return instance!!.applicationContext
+            return instance.applicationContext
         }
     }
 
     override fun onCreate() {
         super.onCreate()
-        applicationContext()
+        instance = this
     }
 }

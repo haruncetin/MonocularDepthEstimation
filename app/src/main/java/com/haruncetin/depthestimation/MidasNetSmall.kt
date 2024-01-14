@@ -1,6 +1,5 @@
 package com.haruncetin.depthestimation
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.camera.core.ExperimentalGetImage
@@ -67,7 +66,10 @@ class MidasNetSmall(
             }
             this.numThreads = NUM_THREADS
         }
-        interpreter = Interpreter(FileUtil.loadMappedFile(DepthEstimationApp.applicationContext(), MODEL_NAME) , interpreterOptions)
+        interpreter = Interpreter(FileUtil.loadMappedFile(
+            DepthEstimationApp.applicationContext(),
+            MODEL_NAME
+        ) , interpreterOptions)
     }
 
     fun getDepthMap( inputImage : Bitmap) : Bitmap {
@@ -91,7 +93,7 @@ class MidasNetSmall(
 
         inferenceTime = System.currentTimeMillis() - startTime
 
-        Log.i(MainActivity.APP_LOG_TAG, "Inference time (in ms): $inferenceTime")
+//        Log.i(MainActivity.APP_LOG_TAG, "Inference time (in ms): $inferenceTime")
 
         // Create a Bitmap from the depth map
         return if (mapType == MapType.DEPTHVIEW_GRAYSCALE)

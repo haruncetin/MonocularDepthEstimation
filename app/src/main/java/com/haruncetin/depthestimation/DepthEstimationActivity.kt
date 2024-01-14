@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.Manifest
 import android.util.Log
 import android.util.Size
 import android.view.SurfaceView
@@ -38,14 +39,14 @@ class DepthEstimationActivity : AppCompatActivity() {
     private var originalView: Preview? = null
     private var depthAnalysisView: ImageAnalysis? = null
 
-    private lateinit var cameraProviderListenableFuture : ListenableFuture<ProcessCameraProvider>
-    private lateinit var frameAnalyser : FrameAnalyser
+    private lateinit var cameraProviderListenableFuture: ListenableFuture<ProcessCameraProvider>
+    private lateinit var frameAnalyser: FrameAnalyser
 
     private var useFrontCamera = false
     private val REQUEST_CODE_PERMISSIONS = 1001
 
     private val REQUIRED_PERMISSIONS = arrayOf(
-        "android.permission.CAMERA"
+        Manifest.permission.CAMERA,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +69,13 @@ class DepthEstimationActivity : AppCompatActivity() {
             initCamera(useFrontCamera)
         }
 
-        spinner!!.onItemSelectedListener =  object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 frameAnalyser = if (position == 0)
                     FrameAnalyser(MidasNetSmall(MapType.DEPTHVIEW_GRAYSCALE), viewDepth!!)
                 else
@@ -77,29 +83,33 @@ class DepthEstimationActivity : AppCompatActivity() {
 
                 initCamera(useFrontCamera)
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
         }
 
-        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Back is pressed... Exiting the app
-                if (doubleBackToExit) {
-                    exitProcess(0)
+        onBackPressedDispatcher.addCallback(
+            this /* lifecycle owner */,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Back is pressed... Exiting the app
+                    if (doubleBackToExit) {
+                        exitProcess(0)
+                    }
+                    doubleBackToExit = true
+                    Toast.makeText(applicationContext, "Press again to exit", Toast.LENGTH_SHORT)
+                        .show()
+                    Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExit = false }, 2000)
                 }
-                doubleBackToExit = true
-                Toast.makeText(applicationContext, "Press again to exit", Toast.LENGTH_SHORT).show()
-                Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExit = false }, 2000)
-            }
-        })
+            })
     }
 
     private fun initCamera(frontCamera: Boolean) {
         if (allPermissionsGranted()) {
-            when(frontCamera) {
-                false -> setupCameraProvider( CameraSelector.LENS_FACING_BACK )
-                true -> setupCameraProvider( CameraSelector.LENS_FACING_FRONT )
+            when (frontCamera) {
+                false -> setupCameraProvider(CameraSelector.LENS_FACING_BACK)
+                true -> setupCameraProvider(CameraSelector.LENS_FACING_FRONT)
             }
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
@@ -140,23 +150,21 @@ class DepthEstimationActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun setupCameraProvider(cameraFacing : Int) {
-        cameraProviderListenableFuture = ProcessCameraProvider.getInstance( this )
+    private fun setupCameraProvider(cameraFacing: Int) {
+        cameraProviderListenableFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderListenableFuture.addListener({
             try {
                 val cameraProvider: ProcessCameraProvider = cameraProviderListenableFuture.get()
-                bindPreview( cameraProvider , cameraFacing )
-            }
-            catch (e: ExecutionException) {
+                bindPreview(cameraProvider, cameraFacing)
+            } catch (e: ExecutionException) {
+                Log.e(MainActivity.APP_LOG_TAG, e.message!!)
+            } catch (e: InterruptedException) {
                 Log.e(MainActivity.APP_LOG_TAG, e.message!!)
             }
-            catch (e: InterruptedException) {
-                Log.e(MainActivity.APP_LOG_TAG, e.message!!)
-            }
-        }, ContextCompat.getMainExecutor( this ))
+        }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun bindPreview(cameraProvider: ProcessCameraProvider , lensFacing : Int ) {
+    private fun bindPreview(cameraProvider: ProcessCameraProvider, lensFacing: Int) {
         if (originalView != null) {
             cameraProvider.unbind(originalView)
         }
@@ -166,20 +174,16 @@ class DepthEstimationActivity : AppCompatActivity() {
         }
 
         val originalResolution = Size(viewOriginal!!.width, viewOriginal!!.height)
+        viewOriginal!!.scaleType = PreviewView.ScaleType.FILL_END
 
-        originalView = Preview.Builder()
-            .setTargetResolution(originalResolution)
-            .build()
+        originalView = Preview.Builder().build()
         originalView!!.setSurfaceProvider(viewOriginal!!.surfaceProvider)
 
         val cameraFacingSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
-        depthAnalysisView = ImageAnalysis.Builder()
-//            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888)
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-            .build()
+        depthAnalysisView = ImageAnalysis.Builder().build()
 
-        depthAnalysisView!!.setAnalyzer(Executors.newCachedThreadPool() , frameAnalyser)
+        depthAnalysisView!!.setAnalyzer(Executors.newCachedThreadPool(), frameAnalyser)
 
         cameraProvider.bindToLifecycle(
             (this as LifecycleOwner),
