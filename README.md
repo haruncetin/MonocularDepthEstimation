@@ -7,25 +7,16 @@ In this project, monocular depth estimation is implemented using pre-trained MiD
 ## Performance
 The model performance mostly depends on device specifications that run the application. The model tested on two devices detailed in table below:
 
-| **Device**               | **OS**     | **Inference Time (ms)** | **Frame Per Second** |
-|--------------------------|------------|-------------------------|----------------------|
-| Xiaomi Redmi Note 8 Pro  | Android 11 | 70-80                   | 6                    |
-| Xiaomi Redmi Note 10 Pro | Android 13 | 90-150                  | 4-5                  |
-| Lenovo K6 Note           | Android 7  | 500-700                 | 1                    |
+| **Device**              | **OS**           | **Inference Time (ms)** | **Frame Per Second** |
+|-------------------------|------------------|-------------------------|----------------------|
+| Xiaomi Redmi Note 8 Pro | Android 11       | 70-80                   | 6                    |
+|     Lenovo K6 Note      |     Android 7    |     500-700             |     1                |
 
 ## Screenshots
 
 ### Lenovo K6 Note
-<img src="media/k6note_depth_est_1_gs.jpg" width="400"> <img src="media/k6note_depth_est_1_hm.jpg" width="400">
-<img src="media/k6note_depth_est_2_gs.jpg" width="400"> <img src="media/k6note_depth_est_2_hm.jpg" width="400">
+<img src="media/depth_est_1_gs.jpg" width="400"> <img src="media/depth_est_1_hm.jpg" width="400">
+<img src="media/depth_est_2_gs.jpg" width="400"> <img src="media/depth_est_2_hm.jpg" width="400">
 
 ### Xiaomi Redmi Note 8 Pro
-<img src="media/note8pro_depth_est_prait_gs.jpg" width="400"> <img src="media/note8pro_depth_est_prait_hm.jpg" width="400">
-<img src="media/note8pro_depth_est_lscape_gs.jpg" width="400">
-<img src="media/note8pro_depth_est_lscape_hm.jpg" width="400">
-
-### Xiaomi Redmi Note 10 Pro
-<img src="media/note10pro_depth_est_prait_gs_1.jpg" width="400"> <img src="media/note10pro_depth_est_prait_hm.jpg" width="400">
-<img src="media/note10pro_depth_est_prait_gs_2.jpg" width="400"> <img src="media/note10pro_depth_est_prait_gs_3.jpg" width="400">
-<img src="media/note10pro_depth_est_lscape_gs.jpg" width="400">
-<img src="media/note10pro_depth_est_lscape_hm.jpg" width="400">
+Will be added soon...
