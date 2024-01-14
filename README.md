@@ -7,10 +7,12 @@ In this project, monocular depth estimation is implemented using pre-trained MiD
 ## Performance
 The model performance mostly depends on device specifications that run the application. The model tested on two devices detailed in table below:
 
-| **Device**              | **OS**           | **Inference Time (ms)** | **Frame Per Second** |
-|-------------------------|------------------|-------------------------|----------------------|
-| Xiaomi Redmi Note 8 Pro | Android 11       | 70-80                   | 6                    |
-|     Lenovo K6 Note      |     Android 7    |     500-700             |     1                |
+| **Device**               | **OS**     | **Inference Time (ms)** | **Frame Per Second** |
+|--------------------------|------------|-------------------------|----------------------|
+| Xiaomi Redmi Note 10 Pro | Android 13 | 90-150                  | 4                    |
+| Xiaomi Redmi Note 8 Pro  | Android 11 | 70-80                   | 6                    |
+| Lenovo K6 Note           | Android 7  | 500-700                 | 1                    |
+| Galaxy A20S              | Android 12 | Android 12              | Android 12           |
 
 ## Screenshots
 
