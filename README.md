@@ -7,12 +7,13 @@ In this project, monocular depth estimation is implemented using pre-trained MiD
 ## Performance
 The model performance mostly depends on device specifications that run the application. The model tested on two devices detailed in table below:
 
-| **Device**              | **OS**     | **Inference Time (ms)** | **Frame Per Second** |
-|-------------------------|------------|-------------------------|----------------------|
+| **Device**               | **OS**     | **Inference Time (ms)** | **Frame Per Second** |
+|--------------------------|------------|-------------------------|----------------------|
 | Xiaomi Redmi Note 10 Pro | Android 13 | 90-150                  | 4                    |
-| Xiaomi Redmi Note 8 Pro | Android 11 | 70-80                   | 6                    |
-| Lenovo K6 Note          | Android 7  | 500-700                 | 1                    |
-| Galaxy A02S             | Android 12 | Failed                  | Failed               |
+| Xiaomi Redmi Note 8 Pro  | Android 11 | 70-80                   | 6                    |
+| Lenovo K6 Note           | Android 7  | 500-700                 | 1                    |
+| Galaxy A02S              | Android 12 | Failed                  | Failed               |
+| Galaxy J4                | Android 10 | 2400-2800               | 1                    |
 
 ## Screenshots
 
@@ -30,3 +31,8 @@ The model performance mostly depends on device specifications that run the appli
 <img src="media/note10pro_depth_est_prait_gs_2.jpg" width="400"> <img src="media/note10pro_depth_est_prait_gs_3.jpg" width="400">
 <img src="media/note10pro_depth_est_lscape_gs.jpg" width="400"> 
 <img src="media/note10pro_depth_est_lscape_hm.jpg" width="400">
+
+### Galaxy J4
+<img src="media/galaxyj4_depth_est_prait_gs.jpg" width="400"> <img src="media/galaxyj4_depth_est_prait_hm.jpg" width="400">
+<img src="media/galaxyj4_depth_est_lscape_gs.jpg" width="400"> 
+<img src="media/galaxyj4_depth_est_lscape_hm.jpg" width="400">
