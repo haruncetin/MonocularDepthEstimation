@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/580930775.svg)](https://doi.org/10.5281/zenodo.18993520)
+
 # Monocular Depth Estimation With MiDaS on Android Mobile Devices
 This project is developed for the [CMP721 - Computational Photography](http://www.ahmetselman.com/cmp721/index.html) (Fall 2022) PhD course given by [Ahmet Selman Bozkır](http://www.ahmetselman.com) from [Computer Engineering Department](http://cs.hacettepe.edu.tr) at [Hacettepe University](http://hacettepe.edu.tr).
 
